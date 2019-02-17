@@ -11,33 +11,9 @@ server.use(cookieParser());
 server.get('/', (req, res) => {
   const username = req.cookies.username;
 
-  res.send(`
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Предложения</title>
-  </head>
-  <body>
-    ${username ?
-      `
-      <p>Привет, ${username}</p>
-      `
-      :
-      `
-      <h1>Вход</h1>
-
-      <form method="POST">
-        <input type="text" name="username">
-        <button type="submit">Войти</button>
-      </form>
-      `
-    }
-  </body>
-  </html>
-  `);
+  res.render('index', {
+    username
+  });
 });
 
 server.post('/', (req, res) => {
