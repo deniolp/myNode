@@ -7,6 +7,10 @@ server.on('request', (req, res) => {
   console.log(req.url);
   console.log(req.headers);
 
+  res.writeHead(200, {
+    'Content-Type': 'text/plain; charset=utf-8'
+  });
+
   res.end('Приветикус!');
 });
 
