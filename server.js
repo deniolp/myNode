@@ -1,7 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const suggestions = ['Знакомство с Node.js'];
+const suggestions = [{
+  title: 'Знакомство с Node.js'
+}];
 
 const server = express();
 
