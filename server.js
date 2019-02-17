@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 
 const server = express();
 
+server.set('view engine', 'pug');
+
 server.use(express.urlencoded({ extended:true }));
 server.use(cookieParser());
 
