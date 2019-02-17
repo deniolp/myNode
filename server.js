@@ -23,4 +23,25 @@ server.post('/', (req, res) => {
   res.redirect('/');
 });
 
+server.get('/suggestions', (req, res) => {
+  //Показать список предложений
+  throw new Error('Not implemented yet');
+});
+
+server.post('/suggestions', (req, res) => {
+  //Создать предложение
+  //Перенаправить на список
+  throw new Error('Not implemented yet');
+});
+
+server.get('/suggestions/1', (req, res) => {
+  //Показать предложение
+  throw new Error('Not implemented yet');
+});
+
+server.post('/suggestions/1', (req, res) => {
+  //Добавить голос и перенаправить на предложение
+  throw new Error('Not implemented yet');
+});
+
 server.listen(3000, 'localhost', () => console.log('Сервер запущен!'));
