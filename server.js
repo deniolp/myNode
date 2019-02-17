@@ -2,6 +2,8 @@ const express = require('express');
 
 const server = express();
 
+server.use(express.urlencoded({ extended:true }));
+
 server.get('/', (req, res) => {
   res.send(`
   <!DOCTYPE html>
@@ -15,13 +17,19 @@ server.get('/', (req, res) => {
   <body>
     <h1>Вход</h1>
 
-    <form>
+    <form method="POST">
       <input type="text" name="username">
       <button type="submit">Войти</button>
     </form>
   </body>
   </html>
   `);
+});
+
+server.post('/', (req, res) => {
+  console.log(req.body);
+
+  res.send('Приветикус!');
 });
 
 server.listen(3000, 'localhost', () => console.log('Сервер запущен!'));
