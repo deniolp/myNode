@@ -1,6 +1,8 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
+const suggestions = ['Знакомство с Node.js'];
+
 const server = express();
 
 server.set('view engine', 'pug');
@@ -24,8 +26,9 @@ server.post('/', (req, res) => {
 });
 
 server.get('/suggestions', (req, res) => {
-  //Показать список предложений
-  throw new Error('Not implemented yet');
+  res.render('suggestions', {
+    suggestions
+  })
 });
 
 server.post('/suggestions', (req, res) => {
