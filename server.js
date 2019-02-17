@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const suggestions = [{
+  id: 1,
   title: 'Знакомство с Node.js'
 }];
 
@@ -39,9 +40,12 @@ server.post('/suggestions', (req, res) => {
   throw new Error('Not implemented yet');
 });
 
-server.get('/suggestions/1', (req, res) => {
-  //Показать предложение
-  throw new Error('Not implemented yet');
+server.get('/suggestions/:id', (req, res) => {
+  const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
+
+  res.render('suggestion', {
+    suggestion
+  });
 });
 
 server.post('/suggestions/1', (req, res) => {
