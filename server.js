@@ -1,10 +1,15 @@
 const express = require('express');
+const querystring = require('querystring');
 
 const server = express();
 
 server.use(express.urlencoded({ extended:true }));
 
 server.get('/', (req, res) => {
+  const cookies = querystring.parse(req.headers.cookie);
+
+  console.log(cookies);
+
   res.send(`
   <!DOCTYPE html>
   <html lang="en">
@@ -27,7 +32,7 @@ server.get('/', (req, res) => {
 });
 
 server.post('/', (req, res) => {
-  res.setHeader('Set-Cookie', ['username=den', 'language=javascript']);
+  res.cookie('username', req.body.username);
 
   res.send(`
   <!DOCTYPE html>
