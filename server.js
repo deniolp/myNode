@@ -27,6 +27,8 @@ server.get('/', (req, res) => {
 });
 
 server.post('/', (req, res) => {
+  res.setHeader('Set-Cookie', ['username=den', 'language=javascript']);
+
   res.send(`
   <!DOCTYPE html>
     <html lang="en">
