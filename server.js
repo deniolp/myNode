@@ -1,14 +1,13 @@
 const express = require('express');
-const querystring = require('querystring');
+const cookieParser = require('cookie-parser');
 
 const server = express();
 
 server.use(express.urlencoded({ extended:true }));
+server.use(cookieParser());
 
 server.get('/', (req, res) => {
-  const cookies = querystring.parse(req.headers.cookie);
-
-  console.log(cookies);
+  const username = req.cookies.username;
 
   res.send(`
   <!DOCTYPE html>
@@ -20,12 +19,20 @@ server.get('/', (req, res) => {
     <title>Предложения</title>
   </head>
   <body>
-    <h1>Вход</h1>
+    ${username ?
+      `
+      <p>Привет, ${username}</p>
+      `
+      :
+      `
+      <h1>Вход</h1>
 
-    <form method="POST">
-      <input type="text" name="username">
-      <button type="submit">Войти</button>
-    </form>
+      <form method="POST">
+        <input type="text" name="username">
+        <button type="submit">Войти</button>
+      </form>
+      `
+    }
   </body>
   </html>
   `);
