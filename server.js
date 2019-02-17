@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const suggestions = [{
-  id: 1,
+  id: '1',
   title: 'Знакомство с Node.js'
 }];
 
@@ -41,7 +41,7 @@ server.post('/suggestions', (req, res) => {
 });
 
 server.get('/suggestions/:id', (req, res) => {
-  const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
+  const suggestion = suggestions.find(suggestion => suggestion.id === req.params.id);
 
   res.render('suggestion', {
     suggestion
