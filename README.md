@@ -7,4 +7,9 @@ and then
 ```
 node server.js
 ```
+---
+
+_Now you can play with result [here](http://localhost:3000)._  ;-)
+
+---
 _Thanks to Codedojo_
