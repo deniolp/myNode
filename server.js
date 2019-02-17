@@ -1,8 +1,10 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
+let nextId = 1;
+
 const suggestions = [{
-  id: '1',
+  id: 1,
   title: 'Знакомство с Node.js'
 }];
 
@@ -35,13 +37,18 @@ server.get('/suggestions', (req, res) => {
 });
 
 server.post('/suggestions', (req, res) => {
-  //Создать предложение
-  //Перенаправить на список
-  throw new Error('Not implemented yet');
+  const title = req.body.title;
+
+  suggestions.push({
+    id: ++nextId,
+    title
+  });
+
+  res.redirect('/suggestions');
 });
 
 server.get('/suggestions/:id', (req, res) => {
-  const suggestion = suggestions.find(suggestion => suggestion.id === req.params.id);
+  const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
 
   res.render('suggestion', {
     suggestion
