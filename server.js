@@ -5,12 +5,9 @@ const server = express();
 
 server.set('view engine', 'pug');
 
+server.use(express.static('public'));
 server.use(express.urlencoded({ extended:true }));
 server.use(cookieParser());
-
-server.get('/styles.css', (req, res) => {
-  res.sendFile('./styles.css', { root: __dirname })
-});
 
 server.get('/', (req, res) => {
   const username = req.cookies.username;
