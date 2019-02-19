@@ -1,5 +1,5 @@
 {
-  "name": "nodejstolearn",
+  "name": "myNode",
   "version": "1.0.0",
   "description": "Learning Node.js",
   "main": "server.js",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deniolp/nodejsToLearn.git"
+    "url": "git+https://github.com/deniolp/myNode.git"
   },
   "keywords": [
     "Node",
@@ -29,7 +29,7 @@
   "author": "Denis Popov",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/deniolp/nodejsToLearn/issues"
+    "url": "https://github.com/deniolp/myNode/issues"
   },
-  "homepage": "https://github.com/deniolp/nodejsToLearn#readme"
+  "homepage": "https://deniolp.github.io/myNode/"
 }
