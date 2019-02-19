@@ -13,4 +13,7 @@ html(lang='ru')
       h1= suggestion.title
 
       form(method='POST')
-        button(type="submit") Проголосовать
+        if suggestion.voters.has(username)
+          button(type="submit") Отменить голос
+        else
+          button(type="submit") Проголосовать

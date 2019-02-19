@@ -50,9 +50,11 @@ server.post('/suggestions', (req, res) => {
 });
 
 server.get('/suggestions/:id', (req, res) => {
+  const username = req.cookies.username;
   const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
 
   res.render('suggestion', {
+    username,
     suggestion
   });
 });
