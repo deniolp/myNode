@@ -63,7 +63,11 @@ server.post('/suggestions/:id', (req, res) => {
   const username = req.cookies.username;
   const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
 
-  suggestion.voters.add(username);
+  if (suggestion.voters.has(username)) {
+    suggestion.voters.delete(username);
+  } else {
+    suggestion.voters.add(username);
+  }
 
   console.log(suggestion);
 
