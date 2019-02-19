@@ -5,7 +5,8 @@ let nextId = 1;
 
 const suggestions = [{
   id: 1,
-  title: 'Знакомство с Node.js'
+  title: 'Знакомство с Node.js',
+  voters: new Set()
 }];
 
 const server = express();
@@ -56,8 +57,7 @@ server.get('/suggestions/:id', (req, res) => {
 });
 
 server.post('/suggestions/1', (req, res) => {
-  //Добавить голос и перенаправить на предложение
-  throw new Error('Not implemented yet');
+  
 });
 
 server.listen(3000, 'localhost', () => console.log('Сервер запущен!'));
