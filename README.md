@@ -1,16 +1,13 @@
 [![Build Status](https://travis-ci.com/deniolp/myNode.svg?branch=master)](https://travis-ci.com/deniolp/myNode)
 # My project for learning Node.js
-Download gzip and in folder make:
+Download zip of repo and then make in folder:
 ```
 npm install
-```
-and then
-```
-node server.js
+node server
 ```
 ---
 
 _Now you can play with result [here](http://localhost:3000)._  ;-)
 
 ---
-_Thanks to Codedojo_
+_Thanks to [Codedojo](https://codedojo.ru/)_
