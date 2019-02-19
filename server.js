@@ -75,4 +75,4 @@ server.post(`/suggestions/:id`, (req, res) => {
   res.redirect(`/suggestions/${suggestion.id}`);
 });
 
-server.listen(8080, `https://deniolp.github.io/myNode/`, () => console.log(`Сервер запущен!`));
+server.listen(3000, `localhost`, () => console.log(`Сервер запущен!`));
