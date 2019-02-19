@@ -42,7 +42,8 @@ server.post('/suggestions', (req, res) => {
 
   suggestions.push({
     id: ++nextId,
-    title
+    title,
+    voters: new Set()
   });
 
   res.redirect('/suggestions');
@@ -56,8 +57,15 @@ server.get('/suggestions/:id', (req, res) => {
   });
 });
 
-server.post('/suggestions/1', (req, res) => {
-  
+server.post('/suggestions/:id', (req, res) => {
+  const username = req.cookies.username;
+  const suggestion = suggestions.find(suggestion => suggestion.id == req.params.id);
+
+  suggestion.voters.add(username);
+
+  console.log(suggestion);
+
+  res.redirect(`/suggestions/${suggestion.id}`);
 });
 
 server.listen(3000, 'localhost', () => console.log('Сервер запущен!'));
