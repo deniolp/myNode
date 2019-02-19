@@ -5,12 +5,12 @@
   "main": "server.js",
   "dependencies": {
     "cookie-parser": "^1.4.4",
+    "eslint-config-htmlacademy": "^0.5.2",
     "express": "^4.16.4",
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "eslint": "^5.14.1",
-    "stylelint-config-htmlacademy": "^0.1.1"
+    "eslint": "^5.14.1"
   },
   "scripts": {
     "test": "eslint *.js",
