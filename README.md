@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/deniolp/myNode.svg?branch=master)](https://travis-ci.com/deniolp/myNode)
 # My project for learning Node.js
 Download gzip and in folder make:
 ```
