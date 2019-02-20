@@ -12,6 +12,12 @@ html(lang='ru')
       a(href='/suggestions') Назад
       h1= suggestion.title
 
+      h2 Проголосовали:
+
+      ul
+        for voter in [...suggestion.voters]
+          li= voter
+
       form(method='POST')
         if suggestion.voters.has(username)
           button(type="submit") Отменить голос
