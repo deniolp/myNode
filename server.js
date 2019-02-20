@@ -18,12 +18,17 @@ server.use(express.static(`public`));
 server.use(express.urlencoded({extended: true}));
 server.use(cookieParser());
 
-server.get(`/`, (req, res) => {
+server.use((req, res, next) => {
   const username = req.cookies.username;
 
-  res.render(`index`, {
-    username
-  });
+  req.username = username;
+  res.locals.username = username;
+
+  next();
+});
+
+server.get(`/`, (req, res) => {
+  res.render(`index`);
 });
 
 server.post(`/`, (req, res) => {
@@ -33,10 +38,7 @@ server.post(`/`, (req, res) => {
 });
 
 server.get(`/suggestions`, (req, res) => {
-  const username = req.cookies.username;
-
   res.render(`suggestions`, {
-    username,
     suggestions
   });
 });
@@ -54,17 +56,15 @@ server.post(`/suggestions`, (req, res) => {
 });
 
 server.get(`/suggestions/:id`, (req, res) => {
-  const username = req.cookies.username;
   const suggestion = suggestions.find((item) => item.id === req.params.id);
 
   res.render(`suggestion`, {
-    username,
     suggestion
   });
 });
 
 server.post(`/suggestions/:id`, (req, res) => {
-  const username = req.cookies.username;
+  const username = req.username;
   const suggestion = suggestions.find((item) => item.id === req.params.id);
 
   if (suggestion.voters.has(username)) {
