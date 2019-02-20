@@ -16,6 +16,8 @@ html(lang='ru')
           li
             a(href=`/suggestions/${suggestion.id}`)= suggestion.title
             |  (#{suggestion.voters.size})
+            form(method='POST' action=`/suggestions/${suggestion.id}`)
+              button(type="submit")= suggestion.voters.has(username) ? 'Отменить голос' : 'Проголосовать'
 
       form(method='POST')
         input(type='text', name='title' placeholder='Название курса')

@@ -33,7 +33,10 @@ server.post(`/`, (req, res) => {
 });
 
 server.get(`/suggestions`, (req, res) => {
+  const username = req.cookies.username;
+
   res.render(`suggestions`, {
+    username,
     suggestions
   });
 });
