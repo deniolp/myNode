@@ -75,7 +75,7 @@ server.post(`/suggestions/:id`, (req, res) => {
 
   console.log(suggestion);
 
-  res.redirect(`/suggestions/${suggestion.id}`);
+  res.redirect(`back`);
 });
 
 server.listen(3000, `localhost`, () => console.log(`Сервер запущен!`));
