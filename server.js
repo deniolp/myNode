@@ -104,8 +104,10 @@ server.post(`/suggestions/:id`, (req, res) => {
 
   if (suggestion.voters.has(username)) {
     suggestion.voters.delete(username);
+    req.session.message = `Голос отменён`;
   } else {
     suggestion.voters.add(username);
+    req.session.message = `Голос принят`;
   }
 
   console.log(suggestion);
