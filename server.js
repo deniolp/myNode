@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const express = require(`express`);
 const cookieParser = require(`cookie-parser`);
+const crypto = require(`crypto`);
 
 let nextId = 1;
 
@@ -9,6 +10,8 @@ const suggestions = [{
   title: `Знакомство с Node.js`,
   voters: new Set()
 }];
+
+const sessions = {};
 
 const server = express();
 
@@ -19,7 +22,28 @@ server.use(express.urlencoded({extended: true}));
 server.use(cookieParser());
 
 server.use((req, res, next) => {
-  const username = req.cookies.username;
+  if (req.cookies.sessionId && sessions[req.cookies.sessionId]) {
+    req.session = sessions[req.cookies.sessionId];
+  } else {
+    const sessionId = crypto.randomBytes(8).toString(`hex`);
+    const session = {
+      id: sessionId
+    };
+
+    sessions[sessionId] = session;
+
+    res.cookie(`sessionId`, sessionId);
+
+    req.session = session;
+  }
+
+  console.log(sessions);
+
+  next();
+});
+
+server.use((req, res, next) => {
+  const username = req.session.username;
 
   req.username = username;
   res.locals.username = username;
@@ -32,7 +56,7 @@ server.get(`/`, (req, res) => {
 });
 
 server.post(`/`, (req, res) => {
-  res.cookie(`username`, req.body.username);
+  req.session.username = req.body.username;
 
   res.redirect(`/`);
 });
