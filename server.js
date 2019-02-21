@@ -68,7 +68,7 @@ server.post(`/`, (req, res) => {
   res.redirect(`/`);
 });
 
-server.use((req, res, next) => {
+server.use(`/suggestions`, (req, res, next) => {
   if (req.session && !req.session.username) {
     res.redirect(`/`);
   } else {
