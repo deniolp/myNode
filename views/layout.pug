@@ -9,4 +9,7 @@ html(lang='ru')
 
   body
     main.page
+      if message
+        p.flash-message= message
+        
       block main

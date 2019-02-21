@@ -63,7 +63,8 @@ server.post(`/`, (req, res) => {
 
 server.get(`/suggestions`, (req, res) => {
   res.render(`suggestions`, {
-    suggestions
+    suggestions,
+    message: req.session.message
   });
 });
 
@@ -75,6 +76,8 @@ server.post(`/suggestions`, (req, res) => {
     title,
     voters: new Set()
   });
+
+  req.session.message = `Предложение принято`;
 
   res.redirect(`/suggestions`);
 });
