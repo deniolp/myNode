@@ -36,9 +36,7 @@ server.use((req, res, next) => {
 
     req.session = session;
   }
-
-  console.log(sessions);
-
+  console.log(req.session);
   next();
 });
 
@@ -68,6 +66,14 @@ server.post(`/`, (req, res) => {
   req.session.username = req.body.username;
 
   res.redirect(`/`);
+});
+
+server.use((req, res, next) => {
+  if (req.session && !req.session.username) {
+    res.redirect(`/`);
+  } else {
+    next();
+  }
 });
 
 server.get(`/suggestions`, (req, res) => {
