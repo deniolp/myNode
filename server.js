@@ -51,6 +51,15 @@ server.use((req, res, next) => {
   next();
 });
 
+server.use((req, res, next) => {
+  if (req.session && req.session.message) {
+    res.locals.message = req.session.message;
+    delete req.session.message;
+  }
+
+  next();
+});
+
 server.get(`/`, (req, res) => {
   res.render(`index`);
 });
@@ -63,8 +72,7 @@ server.post(`/`, (req, res) => {
 
 server.get(`/suggestions`, (req, res) => {
   res.render(`suggestions`, {
-    suggestions,
-    message: req.session.message
+    suggestions
   });
 });
 
