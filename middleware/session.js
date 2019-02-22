@@ -19,6 +19,6 @@ module.exports = function makeSession(req, res, next) {
 
     req.session = session;
   }
-  console.log(req.session);
+
   next();
 };

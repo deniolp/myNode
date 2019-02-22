@@ -26,9 +26,9 @@ server.post(`/`, mainController.login);
 
 server.use(`/suggestions`, auth);
 
-server.get(`/suggestions`, suggestionController.showSeggestions);
+server.get(`/suggestions`, suggestionController.showSuggestions);
 server.post(`/suggestions`, suggestionController.createSuggestion);
-server.get(`/suggestions/:id`, suggestionController.showSeggestion);
+server.get(`/suggestions/:id`, suggestionController.showSuggestion);
 server.post(`/suggestions/:id`, suggestionController.toggleVote);
 
 server.listen(3000, `localhost`, () => console.log(`Сервер запущен!`));

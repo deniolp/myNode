@@ -29,7 +29,7 @@ function createSuggestion(req, res) {
 
 function toggleVote(req, res) {
   const username = req.username;
-  const suggestion = Suggestion.getOne(req.param.id);
+  const suggestion = Suggestion.getOne(req.params.id);
 
   if (suggestion.voters.has(username)) {
     suggestion.voters.delete(username);
