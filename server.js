@@ -3,7 +3,8 @@ const express = require(`express`);
 const cookieParser = require(`cookie-parser`);
 const crypto = require(`crypto`);
 
-const Suggestion = require(`./models/suggestion`);
+const mainController = require(`./controllers/main`);
+const suggestionController = require(`./controllers/suggestion`);
 
 const sessions = {};
 
@@ -52,15 +53,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.get(`/`, (req, res) => {
-  res.render(`index`);
-});
+server.get(`/`, mainController.showMain);
 
-server.post(`/`, (req, res) => {
-  req.session.username = req.body.username;
-
-  res.redirect(`/`);
-});
+server.post(`/`, mainController.login);
 
 server.use(`/suggestions`, (req, res, next) => {
   if (req.session && !req.session.username) {
@@ -70,48 +65,12 @@ server.use(`/suggestions`, (req, res, next) => {
   }
 });
 
-server.get(`/suggestions`, (req, res) => {
-  const suggestions = Suggestion.getAll();
+server.get(`/suggestions`, suggestionController.showSeggestions);
 
-  res.render(`suggestions`, {
-    suggestions
-  });
-});
+server.post(`/suggestions`, suggestionController.createSuggestion);
 
-server.post(`/suggestions`, (req, res) => {
-  const title = req.body.title;
+server.get(`/suggestions/:id`, suggestionController.showSeggestion);
 
-  Suggestion.add(title);
-
-  req.session.message = `Предложение принято`;
-
-  res.redirect(`/suggestions`);
-});
-
-server.get(`/suggestions/:id`, (req, res) => {
-  const suggestion = Suggestion.getOne(req.params.id);
-  console.log(req.params.id);
-
-  res.render(`suggestion`, {
-    suggestion
-  });
-});
-
-server.post(`/suggestions/:id`, (req, res) => {
-  const username = req.username;
-  const suggestion = Suggestion.getOne(req.param.id);
-
-  if (suggestion.voters.has(username)) {
-    suggestion.voters.delete(username);
-    req.session.message = `Голос отменён`;
-  } else {
-    suggestion.voters.add(username);
-    req.session.message = `Голос принят`;
-  }
-
-  console.log(suggestion);
-
-  res.redirect(`back`);
-});
+server.post(`/suggestions/:id`, suggestionController.toggleVote);
 
 server.listen(3000, `localhost`, () => console.log(`Сервер запущен!`));
