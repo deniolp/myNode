@@ -3,13 +3,7 @@ const express = require(`express`);
 const cookieParser = require(`cookie-parser`);
 const crypto = require(`crypto`);
 
-let nextId = 1;
-
-const suggestions = [{
-  id: `1`,
-  title: `Знакомство с Node.js`,
-  voters: new Set()
-}];
+const Suggestion = require(`./models/suggestion`);
 
 const sessions = {};
 
@@ -77,6 +71,8 @@ server.use(`/suggestions`, (req, res, next) => {
 });
 
 server.get(`/suggestions`, (req, res) => {
+  const suggestions = Suggestion.getAll();
+
   res.render(`suggestions`, {
     suggestions
   });
@@ -85,11 +81,7 @@ server.get(`/suggestions`, (req, res) => {
 server.post(`/suggestions`, (req, res) => {
   const title = req.body.title;
 
-  suggestions.push({
-    id: ++nextId + ``,
-    title,
-    voters: new Set()
-  });
+  Suggestion.add(title);
 
   req.session.message = `Предложение принято`;
 
@@ -97,7 +89,8 @@ server.post(`/suggestions`, (req, res) => {
 });
 
 server.get(`/suggestions/:id`, (req, res) => {
-  const suggestion = suggestions.find((item) => item.id === req.params.id);
+  const suggestion = Suggestion.getOne(req.params.id);
+  console.log(req.params.id);
 
   res.render(`suggestion`, {
     suggestion
@@ -106,7 +99,7 @@ server.get(`/suggestions/:id`, (req, res) => {
 
 server.post(`/suggestions/:id`, (req, res) => {
   const username = req.username;
-  const suggestion = suggestions.find((item) => item.id === req.params.id);
+  const suggestion = Suggestion.getOne(req.param.id);
 
   if (suggestion.voters.has(username)) {
     suggestion.voters.delete(username);
