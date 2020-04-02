@@ -10,6 +10,7 @@
     "eslint-utils": "^1.4.2",
     "express": "^4.16.4",
     "js-yaml": "^3.13.1",
+    "kind-of": "^6.0.3",
     "lodash": "^4.17.14",
     "minimist": "^1.2.5",
     "pug": "^2.0.3"
